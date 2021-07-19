@@ -1,0 +1,226 @@
+$${
+
+//  INGAME MKB WIKI														;
+//	--> using Wiki API provided by Gorlem								;
+
+//  Game version: 1.12.2												;
+//  Modules Needed:														;
+//	-> Klacaiba: https://spthiel.github.io/Modules/?name=Klacaiba		;
+//	-> HTTP module: https://spthiel.github.io/Modules/?name=HTTP		;
+
+//  Made by lomexicano													;
+//  Discord Tag: lomexicano#0001										;
+//  Discord ID: 277301646050983936										;
+
+
+split("","4c6e2ab319d5f787f5d913ba2e6c",&color_list[]);
+arraysize(&color_list[],#number_of_colors);
+split(",","related,resource,extendedName,name,description,changelog,permission,sinceVersion,links,type,category,example",&all_api_data[]);
+
+unset(@&last_wiki_update);
+unset(@&backup_api_response);
+
+if(DATE != @&last_wiki_update);	
+	log("&f&l[&2&lMA&f&lC&4&lRO&f&l] &fAsking for API response...");
+	unset(&all_resources[]);
+	&response = httpget("https://beta.mkb.gorlem.ml/api/docs",,,);
+
+	log("&f&l[&2&lMA&f&lC&4&lRO&f&l] &aAPI response received!");
+	
+	set(&response_temp,"%&response%");
+	
+	regexreplace(&response_temp,"(\"type\":\"Variable\",\"name\":\"[^\"]+\",\"extendedName\":\")[^\"]+(\")","$1$2");
+	regexreplace(&response_temp,"\d+-\d+-\d+","2009-05-16");
+	regexreplace(&response_temp,"\d+:\d+:\d+","23:59:59");
+	
+	if(&response_temp != @&backup_api_response);
+		
+		log(" ");
+		log("&f&l[&2&lMA&f&lC&4&lRO&f&l] &eUpdating wiki data. Please wait...");
+		
+		
+		&all_resources[] = getjsonasarray("%&response%");
+		arraysize(&all_resources[],#size);
+		
+		unset(&information[]);
+		unset(&array_all_names[]);
+		
+		unset(@&variable_names[]);
+		unset(@&action_names[]);
+		unset(@&iterator_names[]);
+		unset(@&event_names[]);
+		unset(@&parameter_names[]);
+		unset(@&repl_names[]);
+	
+
+		unsafe(500);
+			foreach(&all_resources[],&who2,#pos);
+				set(&who,"%&who2%");
+								
+				replace(&who,"\n","\\\n");
+				replace(&who,"\"","'");
+				replace(&who,"`","");
+				
+				&related = jsonget("%&who%","related");
+				&resource = jsonget("%&who%","resource");
+				&extended_name = jsonget("%&who%","extendedName");
+				&name = jsonget("%&who%","name");
+				&description = jsonget("%&who%","description");
+				&changelog = jsonget("%&who%","changelog");
+				&permission = jsonget("%&who%","permission");
+				&sinceversion = jsonget("%&who%","sinceVersion");
+				&links = jsonget("%&who%","links");
+				&type = jsonget("%&who%","type");
+				&category = jsonget("%&who%","category");
+				&example = jsonget("%&who%","example");
+				
+				//replace(&name,"\"","'");
+				
+				set(&all_names[%#pos%],"<%&type%>%&name%");
+				
+				// Rainbow;
+				if(&type == "Variable");
+					arraysize(@&variable_names[],#item_pos);
+				elseif(&type == "Action");
+					arraysize(@&action_names[],#item_pos);
+				elseif(&type == "Iterator");
+					arraysize(@&iterator_names[],#item_pos);
+				elseif(&type == "Event");
+					arraysize(@&event_names[],#item_pos);
+				elseif(&type == "Parameter");
+					arraysize(@&parameter_names[],#item_pos);
+				elseif(&type == "REPL Command");
+					arraysize(@&repl_names[],#item_pos);
+				endif;
+				#dec = #item_pos / #number_of_colors;
+				#dec = #dec * #number_of_colors;
+				#item_pos = #item_pos - #dec;
+				set(&name,"§%&color_list[%#item_pos%]%%&name%");
+				
+				if(&type == "Variable");
+					@&variable_names[] = "%&name%";
+				elseif(&type == "Action");
+					@&action_names[] = "%&name%";
+				elseif(&type == "Iterator");
+					@&iterator_names[] = "%&name%";
+				elseif(&type == "Event");
+					@&event_names[] = "%&name%";
+				elseif(&type == "Parameter");
+					ifmatches("%&name%","\$\$(.*)$",&rest_of_it,1);
+						set(&name,"$$§%&color_list[%#item_pos%]%%&rest_of_it%");
+					endif;
+					@&parameter_names[] = "%&name%";
+				elseif(&type == "REPL Command");
+					@&repl_names[] = "%&name%";
+				endif;
+				
+				set(&temp,"%&related%¬%&resource%¬%&extended_name%¬%&name%¬%&description%¬%&changelog%¬%&permission%¬%&sinceversion%¬%&links%¬%&type%¬%&category%¬%&example%");
+				replace(&temp,"null","");
+				set(&information[%#pos%],"%&temp%");				
+			next;
+		endunsafe;
+		log("&f&l[&2&lMA&f&lC&4&lRO&f&l] &aDone!");
+		join("<<@>>",&information[],@&backup_api_prompt);
+		join("<<@>>",&all_names[],@&backup_api_all_names);
+		set(@&backup_api_response,"%&response_temp%");
+	else;
+		log(" ");
+		log("&f&l[&2&lMA&f&lC&4&lRO&f&l] &aNo need to update any information!");
+	endif;
+	set(@&last_wiki_update,"%DATE%");
+endif;
+
+split("<<@>>","%@&backup_api_prompt%",&information[]);
+split("<<@>>","%@&backup_api_all_names%",&all_names[]);
+
+
+do();
+while(GUI != "NONE");
+
+unset(&answer);
+prompt(&answer,"$$[ [§aAction,§eVariable,§bEvent,§fIterator,§6Parameter,§cREPL Command]]","§eChoose the category you are looking for");
+strip(&answer,"%&answer%");
+
+unset(&prompt);
+if(&answer == "Variable");
+	join("\",\"",@&variable_names[],&prompt);
+elseif(&answer == "Action");
+	join("\",\"",@&action_names[],&prompt);
+elseif(&answer == "Iterator");
+	join("\",\"",@&iterator_names[],&prompt);
+elseif(&answer == "Event");
+	join("\",\"",@&event_names[],&prompt);
+elseif(&answer == "Parameter");
+	join("\",\"",@&parameter_names[],&prompt);
+elseif(&answer == "REPL Command");
+	join("\",\"",@&repl_names[],&prompt);
+else;
+	stop;
+endif;
+set(&prompt,"\"%&prompt%\"");
+
+replace(&prompt,"[","(");
+replace(&prompt,"]",")");
+//replace(&prompt,"array,of,things","array_of_things");
+replace(&prompt,"$$","§8'§a2§edol§8'§r");
+
+strip(&answer_type,"%&answer%");
+if(&prompt);
+	do();
+	while(GUI != "NONE");
+	unset(&answer);
+	prompt(&answer,"$$[ [%&prompt%]]","§eChoose what you are looking for");
+	strip(&answer,"%&answer%");
+	replace(&answer,"(","[");
+	replace(&answer,")","]");
+	replace(&answer,"array_of_things","array,of,things");
+	replace(&answer,"'2dol'","$$");
+	indexof(&all_names[],#index,"<%&answer_type%>%&answer%");
+	if(#index < 0);
+		if(&answer);
+			log("&f&l[&2&lMA&f&lC&4&lRO&f&l] &cError -> cannot find answer &8(&e<%&answer_type%>%&answer%&8) &cin name_list!");
+		endif;
+	else;
+		split("¬","%&information[%#index%]%",&log[]);
+		unset(is_variable);
+		log(" ");
+		log("&f&l[&2&lMA&f&lC&4&lRO&f&l] &f%&answer_type%&8: &6%&answer%");
+		foreach(&log[],&log,#index);
+			if(&log);
+				unset(reading_extended_name);
+				ifmatches("%&all_api_data[%#index%]%","^name$");
+					strip(&log2,"%&log%");
+				else;
+					set(&log2,"%&log%");
+				endif;
+				
+				replace(&log2,"'","\\\"");
+				regexreplace(&log2,"\u0009","    ");
+				log(" ");
+				log("&8[&a%#index%&8] &%&color_list[%#index%]%%&all_api_data[%#index%]%");
+				if(is_variable);
+					ifmatches("%&all_api_data[%#index%]%","^extendedName$");
+						set(reading_extended_name);
+					endif;
+				endif;
+				
+				split("\n","%&log2%",&log2[]);
+				foreach(&log2[],&i);
+					ifmatches("%&i%","/api/(docs.+)$",&log2,1);
+						lograw(["",{"text":"   "},{"text":"https://beta.mkb.gorlem.ml/%&log2%","color":"gold","underlined":true,"clickEvent":{"action":"open_url","value":"https://beta.mkb.gorlem.ml/%&log2%"},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Open documentation","color":"green"}]}}}]);
+						ifmatches("%&i%","Variable");
+							set(is_variable);
+						endif;
+					elseif((is_variable)&&(reading_extended_name));
+					ucase("%&log[3]%",&log3);
+						strip(&log3,"%&log3%");
+						lograw(["",{"text":"   %%&log3%"},{"text":"%"}]);
+					else;
+						lograw("   %&i%");
+					endif;
+				next;
+			endif;
+		next;
+	endif;
+endif;
+}$$
