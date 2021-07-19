@@ -1,24 +1,21 @@
 $${
 
-//  INGAME MKB WIKI														;
-//	--> using Wiki API provided by Gorlem								;
+//  INGAME MKB WIKI								;
+//	--> using Wiki API provided by Gorlem					;
 
-//  Game version: 1.12.2												;
-//  Modules Needed:														;
+//  Game version: 1.12.2							;
+//  Modules Needed:								;
 //	-> Klacaiba: https://spthiel.github.io/Modules/?name=Klacaiba		;
 //	-> HTTP module: https://spthiel.github.io/Modules/?name=HTTP		;
 
-//  Made by lomexicano													;
-//  Discord Tag: lomexicano#0001										;
-//  Discord ID: 277301646050983936										;
+//  Made by lomexicano								;
+//  Discord Tag: lomexicano#0001						;
+//  Discord ID: 277301646050983936						;
 
 
 split("","4c6e2ab319d5f787f5d913ba2e6c",&color_list[]);
 arraysize(&color_list[],#number_of_colors);
 split(",","related,resource,extendedName,name,description,changelog,permission,sinceVersion,links,type,category,example",&all_api_data[]);
-
-unset(@&last_wiki_update);
-unset(@&backup_api_response);
 
 if(DATE != @&last_wiki_update);	
 	log("&f&l[&2&lMA&f&lC&4&lRO&f&l] &fAsking for API response...");
