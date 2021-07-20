@@ -13,6 +13,8 @@ Modules needed:
 Running the file for the first time will load everything and save this information. It will check if the information needs to be updated or not only once a day, hence it will load instantly after the first time you run it in the day, and won't need to wait anything more than 2 seconds (only in this first r) if the API had no updates.
 
 ScreenShots:
+![alt_text](https://i.imgur.com/rfBQebj.png)
+
 ![alt text](https://i.imgur.com/V3sMkUA.png)
 ![alt text](https://i.imgur.com/yaMhTXw.png)
 ![alt text](https://i.imgur.com/93f9HBh.png)
