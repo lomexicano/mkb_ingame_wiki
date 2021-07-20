@@ -2,7 +2,7 @@
 Ingame Macro KeybBind mod wiki, using GORLEM's API
 This is basically a way to use Gorlem's Wiki on MacroMod (all commands, variables, iterators, parameters, etc.) without needing to go to your browser.
 
-This script was developed for Macro KeyBind Mod, by Mumfrey → Minecraft 1.12.1 or 1.12.2
+This script was developed to be used through Macro KeyBind Mod (by Mumfrey) → Minecraft 1.12.1 or 1.12.2
 * Official post: https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/1275039-macro-keybind-mod
 
 Modules needed:
