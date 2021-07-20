@@ -1,18 +1,19 @@
-# mkb_ingame_wiki
-Ingame Macro KeybBind mod wiki, using GORLEM's API.  
+# Ingame WIKI for MacroMod
+### Ingame Macro KeybBind mod wiki, using GORLEM's API.  
 This is basically a way to use Gorlem's Wiki on MacroMod (all commands, variables, iterators, parameters, etc.) without needing to go to your browser.
 
-This script was developed to be used through Macro KeyBind Mod (by Mumfrey) → Minecraft 1.12.1 or 1.12.2
+
+This script was developed to be used through **Macro KeyBind Mod** (by Mumfrey) → Minecraft 1.12.1 or 1.12.2
 * Mod: https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/1275039-macro-keybind-mod
 * Liteloader: https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/1290155-liteloader
 
 Modules needed:
-* Klacaiba, by Spthiel: https://spthiel.github.io/Modules/?name=Klacaiba
-* Http, by xaero_: https://spthiel.github.io/Modules/?name=HTTP
+1. **Klacaiba**, by Spthiel: https://spthiel.github.io/Modules/?name=Klacaiba
+2. **HTTP**, by xaero_: https://spthiel.github.io/Modules/?name=HTTP
 
 Running the file for the first time will load everything and save this information. It will check if the information needs to be updated or not only once a day, hence it will load instantly after the first time you run it in the day, and won't need to wait anything more than 2 seconds (only in this first r) if the API had no updates.
 
-ScreenShots:  
+## ScreenShots:  
 ![alt_text](https://i.imgur.com/rfBQebj.png)  
   
 ![alt text](https://i.imgur.com/V3sMkUA.png)  
