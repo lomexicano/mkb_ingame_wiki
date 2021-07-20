@@ -11,7 +11,7 @@ Modules needed:
 1. **Klacaiba**, by Spthiel: https://spthiel.github.io/Modules/?name=Klacaiba
 2. **HTTP**, by xaero_: https://spthiel.github.io/Modules/?name=HTTP
 
-Running the file for the first time will load everything and save this information. It will check if the information needs to be updated or not only once a day, hence it will load instantly after the first time you run it in the day, and won't need to wait anything more than 2 seconds (only in this first r) if the API had no updates.
+Running the file for the first time will load everything and save this information. It will check if the information needs to be updated or not only once a day, hence it will load instantly after the first time you run it in the day (and this daily delay should not be more than 2 seconds if the API had no updates. I say approximatedly 2 seconds because it's the time it takes to make an http-request and get the response from the server).
 
 ## ScreenShots:  
 ![alt_text](https://i.imgur.com/rfBQebj.png)  
