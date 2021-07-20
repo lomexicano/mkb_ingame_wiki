@@ -13,13 +13,41 @@ Modules needed:
 
 Running the file for the first time will load everything and save this information. It will check if the information needs to be updated or not only once a day, hence it will load instantly after the first time you run it in the day (and this daily delay should not be more than 2 seconds if the API had no updates. I say approximatedly 2 seconds because it's the time it takes to make an http-request and get the response from the server).
 
-## ScreenShots:  
-![alt_text](https://i.imgur.com/rfBQebj.png)  
-  
-![alt text](https://i.imgur.com/V3sMkUA.png)  
-![alt text](https://i.imgur.com/yaMhTXw.png)  
-![alt text](https://i.imgur.com/93f9HBh.png)  
-![alt text](https://i.imgur.com/tFMxW72.png)  
-![alt text](https://i.imgur.com/89T6aNg.png)  
-![alt text](https://i.imgur.com/kZtBcu4.png)  
-![alt text](https://i.imgur.com/086yUEu.png)  
+All menu texts are displayed colored in a rainbow way... Idk, I thought it would be better to read this way (and way funnier than just white) xD
+
+## Script source:
+* [Click Here](https://github.com/lomexicano/mkb_ingame_wiki/blob/main/Wiki.txt)
+
+## ScreenShots:
+<details>
+  <summary>Chat output, having chosen "Action → Look"</summary>
+  <img src="https://i.imgur.com/rfBQebj.png">
+</details>
+<details>
+  <summary>Main Menu</summary>
+  <img src="https://i.imgur.com/V3sMkUA.png">
+</details>
+<details>
+  <summary>Action list</summary>
+  <img src="https://i.imgur.com/yaMhTXw.png">
+</details>
+<details>
+  <summary>Variable list</summary>
+  <img src="https://i.imgur.com/93f9HBh.png">
+</details>
+<details>
+  <summary>Event list</summary>
+  <img src="https://i.imgur.com/tFMxW72.png">
+</details>
+<details>
+  <summary>Iterator list</summary>
+  <img src="https://i.imgur.com/89T6aNg.png">
+</details>
+<details>
+  <summary>Parameter list</summary>
+  <img src="https://i.imgur.com/kZtBcu4.png">
+</details>
+<details>
+  <summary>REPL Command list</summary>
+  <img src="https://i.imgur.com/086yUEu.png">
+</details>
