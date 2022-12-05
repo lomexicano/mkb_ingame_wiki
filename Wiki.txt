@@ -20,7 +20,7 @@ split(",","related,resource,extendedName,name,description,changelog,permission,s
 if(DATE != @&last_wiki_update);	
 	log("&f&l[&2&lMA&f&lC&4&lRO&f&l] &fAsking for API response...");
 	unset(&all_resources[]);
-	&response = httpget("https://beta.mkb.gorlem.ml/api/docs",,,);
+	&response = httpget("https://mkb.ddoerr.com/api/docs",,,);
 
 	log("&f&l[&2&lMA&f&lC&4&lRO&f&l] &aAPI response received!");
 	
@@ -204,7 +204,7 @@ if(&prompt);
 				split("\n","%&log2%",&log2[]);
 				foreach(&log2[],&i);
 					ifmatches("%&i%","/api/(docs.+)$",&log2,1);
-						lograw(["",{"text":"   "},{"text":"https://beta.mkb.gorlem.ml/%&log2%","color":"gold","underlined":true,"clickEvent":{"action":"open_url","value":"https://beta.mkb.gorlem.ml/%&log2%"},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Open documentation","color":"green"}]}}}]);
+						lograw(["",{"text":"   "},{"text":"https://mkb.ddoerr.com/%&log2%","color":"gold","underlined":true,"clickEvent":{"action":"open_url","value":"https://mkb.ddoerr.com/%&log2%"},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Open documentation","color":"green"}]}}}]);
 						ifmatches("%&i%","Variable");
 							set(is_variable);
 						endif;
